@@ -22,11 +22,12 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import com.example.inventory.data.Item
 import java.text.NumberFormat
+import com.example.inventory.data.ItemsRepository
 
 /**
  * ViewModel to validate and insert items in the Room database.
  */
-class ItemEntryViewModel : ViewModel() {
+class ItemEntryViewModel(private val itemsRepository: ItemsRepository) : ViewModel() {
 
     /**
      * Holds current item ui state
@@ -88,7 +89,6 @@ fun Item.toItemUiState(isEntryValid: Boolean = false): ItemUiState = ItemUiState
     itemDetails = this.toItemDetails(),
     isEntryValid = isEntryValid
 )
-
 /**
  * Extension function to convert [Item] to [ItemDetails]
  */
@@ -98,3 +98,6 @@ fun Item.toItemDetails(): ItemDetails = ItemDetails(
     price = price.toString(),
     quantity = quantity.toString()
 )
+
+suspend fun saveItem() {
+}
